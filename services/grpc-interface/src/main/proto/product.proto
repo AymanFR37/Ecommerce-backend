@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.backend.grpcinterface.proto;
+
+option java_multiple_files = true;
+option java_package = "com.backend.grpcinterface.proto";
+option java_outer_classname = "ProductProto";
+
+message ProductRequest {
+}
+
+message ProductResponse {
+  int32 productId = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  double quantity = 5;
+}
+
+message ProductListResponse {
+  repeated ProductResponse products = 1;
+}
+
+service ProductService {
+  rpc GetAllProducts(ProductRequest) returns (ProductListResponse) {}
+}
