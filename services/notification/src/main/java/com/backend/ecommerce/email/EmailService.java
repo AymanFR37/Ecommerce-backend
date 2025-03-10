@@ -37,23 +37,23 @@ public class EmailService {
             String orderReference
     ) throws MessagingException {
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
+        final MimeMessage mimeMessage = mailSender.createMimeMessage();
+        final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
         messageHelper.setFrom("support@mail.com");
 
         final String templateName = PAYMENT_CONFIRMATION.getTemplate();
 
-        Map<String, Object> variables = new HashMap<>();
+        final Map<String, Object> variables = new HashMap<>();
         variables.put("customerName", customerName);
         variables.put("amount", amount);
         variables.put("orderReference", orderReference);
 
-        Context context = new Context();
+        final Context context = new Context();
         context.setVariables(variables);
         messageHelper.setSubject(PAYMENT_CONFIRMATION.getSubject());
 
         try {
-            String htmlTemplate = templateEngine.process(templateName, context);
+            final String htmlTemplate = templateEngine.process(templateName, context);
             messageHelper.setText(htmlTemplate, true);
 
             messageHelper.setTo(destinationEmail);
@@ -74,24 +74,24 @@ public class EmailService {
             List<Product> products
     ) throws MessagingException {
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
+        final MimeMessage mimeMessage = mailSender.createMimeMessage();
+        final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
         messageHelper.setFrom("support@mail.com");
 
         final String templateName = ORDER_CONFIRMATION.getTemplate();
 
-        Map<String, Object> variables = new HashMap<>();
+        final Map<String, Object> variables = new HashMap<>();
         variables.put("customerName", customerName);
         variables.put("totalAmount", amount);
         variables.put("orderReference", orderReference);
         variables.put("products", products);
 
-        Context context = new Context();
+        final Context context = new Context();
         context.setVariables(variables);
         messageHelper.setSubject(ORDER_CONFIRMATION.getSubject());
 
         try {
-            String htmlTemplate = templateEngine.process(templateName, context);
+            final String htmlTemplate = templateEngine.process(templateName, context);
             messageHelper.setText(htmlTemplate, true);
 
             messageHelper.setTo(destinationEmail);

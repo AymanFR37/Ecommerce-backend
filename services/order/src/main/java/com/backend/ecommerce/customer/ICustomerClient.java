@@ -10,7 +10,7 @@ import java.util.Optional;
         name = "customer-service",
         url = "${application.config.customer-url}"
 )
-public interface CustomerClient {
+public interface ICustomerClient {
 
     @GetMapping("/{customer-id}")
     Optional<CustomerResponse> findCustomerById(@PathVariable("customer-id") String customerId);

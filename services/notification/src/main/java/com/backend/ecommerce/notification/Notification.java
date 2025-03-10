@@ -4,7 +4,6 @@ import com.backend.ecommerce.kafka.order.OrderConfirmation;
 import com.backend.ecommerce.kafka.payment.PaymentConfirmation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

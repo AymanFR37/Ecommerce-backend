@@ -2,5 +2,5 @@ package com.backend.ecommerce.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface IOrderRepository extends JpaRepository<Order, Integer> {
 }

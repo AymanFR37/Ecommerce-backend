@@ -18,7 +18,7 @@ public class OrderProducer {
 
     public void sendOrderConfirmation(OrderConfirmation orderConfirmation) {
         log.info("Sending order confirmation");
-        Message<OrderConfirmation> message = MessageBuilder
+        final Message<OrderConfirmation> message = MessageBuilder
                 .withPayload(orderConfirmation)
                 .setHeader(TOPIC, "order-topic")
                 .build();

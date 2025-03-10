@@ -3,7 +3,7 @@
  */
 package com.backend.ecommerce.grpc;
 
-import com.backend.ecommerce.product.ProductRepository;
+import com.backend.ecommerce.product.IProductRepository;
 import com.backend.grpcinterface.proto.ProductListResponse;
 import com.backend.grpcinterface.proto.ProductRequest;
 import com.backend.grpcinterface.proto.ProductResponse;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Slf4j
 public class ProductService extends ProductServiceGrpc.ProductServiceImplBase {
 
-    private final ProductRepository repository;
+    private final IProductRepository repository;
 
     /**
      * Retrieves all products and sends them in the response.
@@ -32,17 +32,15 @@ public class ProductService extends ProductServiceGrpc.ProductServiceImplBase {
     @Override
     public void getAllProducts(ProductRequest request, StreamObserver<ProductListResponse> responseObserver) {
         log.info("in product service");
-        var products = repository.findAll();
-        var response = ProductListResponse.newBuilder();
-        for (var product : products) {
-            response.addProducts(ProductResponse.newBuilder()
-                    .setProductId(product.getId())
-                    .setName(product.getName())
-                    .setDescription(product.getDescription())
-                    .setPrice(product.getPrice().doubleValue())
-                    .setQuantity(product.getAvailableQuantity())
-                    .build());
-        }
+        final var products = repository.findAll();
+        final var response = ProductListResponse.newBuilder();
+        products.forEach(product -> response.addProducts(ProductResponse.newBuilder()
+                .setProductId(product.getId())
+                .setName(product.getName())
+                .setDescription(product.getDescription())
+                .setPrice(product.getPrice().doubleValue())
+                .setQuantity(product.getAvailableQuantity())
+                .build()));
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }

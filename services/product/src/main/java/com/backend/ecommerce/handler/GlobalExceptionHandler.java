@@ -1,5 +1,6 @@
 package com.backend.ecommerce.handler;
 
+import com.backend.ecommerce.exception.BusinessException;
 import com.backend.ecommerce.exception.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler {
                 .body(exp.getMessage());
     }
 
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<String> handle(BusinessException exp) {
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(exp.getMessage());
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handle(EntityNotFoundException exp) {
         return ResponseEntity
@@ -31,11 +39,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
-        var errors = new HashMap<String, String>();
+        final HashMap<String, String> errors = new HashMap<>();
         exp.getBindingResult().getAllErrors()
                 .forEach(error -> {
-                    var fieldName = ((FieldError) error).getField();
-                    var errorMessage = error.getDefaultMessage();
+                    final var fieldName = ((FieldError) error).getField();
+                    final var errorMessage = error.getDefaultMessage();
                     errors.put(fieldName, errorMessage);
                 });
 

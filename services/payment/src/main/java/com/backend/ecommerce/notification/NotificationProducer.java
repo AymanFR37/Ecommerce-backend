@@ -18,7 +18,7 @@ public class NotificationProducer {
 
     public void sendNotification(PaymentNotificationRequest request) {
         log.info("Sending notification with body = < {} >", request);
-        Message<PaymentNotificationRequest> message = MessageBuilder
+        final Message<PaymentNotificationRequest> message = MessageBuilder
                 .withPayload(request)
                 .setHeader(TOPIC, "payment-topic")
                 .build();

@@ -9,11 +9,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderLineService {
 
-    private final OrderLineRepository repository;
-    private final OrderLineMapper mapper;
+    private final IOrderLineRepository repository;
+    private final IOrderLineMapper mapper;
 
     public Integer saveOrderLine(OrderLineRequest request) {
-        var order = mapper.toOrderLine(request);
+        final var order = mapper.toOrderLine(request);
         return repository.save(order).getId();
     }
 

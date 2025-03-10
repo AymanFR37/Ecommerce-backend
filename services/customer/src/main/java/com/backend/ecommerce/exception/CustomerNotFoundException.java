@@ -1,11 +1,12 @@
 package com.backend.ecommerce.exception;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@RequiredArgsConstructor
+@Getter
 public class CustomerNotFoundException extends RuntimeException {
-
     private final String msg;
 }

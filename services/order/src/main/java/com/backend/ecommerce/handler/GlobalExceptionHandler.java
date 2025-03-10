@@ -24,11 +24,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
-        var errors = new HashMap<String, String>();
+        final HashMap<String, String> errors = new HashMap<>();
         exp.getBindingResult().getAllErrors()
                 .forEach(error -> {
-                    var fieldName = ((FieldError) error).getField();
-                    var errorMessage = error.getDefaultMessage();
+                    final var fieldName = ((FieldError) error).getField();
+                    final var errorMessage = error.getDefaultMessage();
                     errors.put(fieldName, errorMessage);
                 });
 

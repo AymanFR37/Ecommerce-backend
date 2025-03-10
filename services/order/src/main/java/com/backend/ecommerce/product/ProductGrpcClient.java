@@ -60,7 +60,7 @@ public class ProductGrpcClient {
     public List<PurchaseResponse> getAllProducts() {
         log.info("in product grpc client");
         try {
-            ProductListResponse response = productServiceStub
+            final ProductListResponse response = productServiceStub
                     .withDeadlineAfter(1000, TimeUnit.MILLISECONDS)
                     .getAllProducts(ProductRequest.newBuilder()
                             .build());

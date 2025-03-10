@@ -2,7 +2,7 @@ package com.backend.ecommerce.customer;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface ICustomerService {
     String createCustomer(CustomerRequest request);
 
     void updateCustomer(CustomerRequest request);
